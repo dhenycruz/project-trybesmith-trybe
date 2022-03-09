@@ -1,37 +1,37 @@
 import { Request, Response, NextFunction } from 'express';
-import * as modelUser from '../services/user';
+import * as serviceUser from '../services/user';
 
 export const authName = (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
-  const result = modelUser.authName(body);
+  const result = serviceUser.authName(body);
   if (result !== true) return res.status(result.status).json({ error: result.message });
   next();
 };
 
 export const authClass = (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
-  const result = modelUser.authClass(body);
+  const result = serviceUser.authClass(body);
   if (result !== true) return res.status(result.status).json({ error: result.message });
   next();
 };
 
 export const authLevel = (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
-  const result = modelUser.authLevel(body);
+  const result = serviceUser.authLevel(body);
   if (result !== true) return res.status(result.status).json({ error: result.message });
   next();
 };
 
 export const authPassword = (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
-  const result = modelUser.authPassword(body);
+  const result = serviceUser.authPassword(body);
   if (result !== true) return res.status(result.status).json({ error: result.message });
   next();
 };
 
 export const createUser = async (req: Request, res: Response) => {
   const { body } = req;
-  const result = await modelUser.createUser(body);
+  const result = await serviceUser.createUser(body);
   if (result.status === 500) res.status(500);
   res.status(result.status).json({ token: result.token });
 };

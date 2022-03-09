@@ -3,16 +3,37 @@ import connection from './connection';
 import { Iuser, Alluser } from '../interfaces/user';
 
 export const getAllUser = async () => {
-  const [row] = await connection.execute('SELECT * FROM users');
+  const [row] = await connection.execute('SELECT * FROM Trybesmith.Users');
   return row as Alluser[];
 };
 
-export const createUser = async (body: Iuser): Promise<Alluser> => {
+export const createUser = async (body: Iuser): Promise<Alluser | false> => {
   const { username, classe, level, password } = body;
-  const [result] = await connection.execute<ResultSetHeader>(
-    'INSERT INTO Trybesmith.Users (username, classe, level, password) values (?,?,?,?)',
-    [username, classe, level, password],
+  try {
+    const [result] = await connection.execute<ResultSetHeader>(
+      'INSERT INTO Trybesmith.Users (username, classe, level, password) values (?,?,?,?)',
+      [username, classe, level, password],
+    );
+    const { insertId: id } = result;
+    return { id, username, classe, level, password };
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
+export const verifyUserName = async (userName: string): Promise<Alluser[]> => {
+  const [row] = await connection.execute(
+    'SELECT * FROM Trybesmith.Users WHERE username = ?',
+    [userName],
   );
-  const { insertId: id } = result;
-  return { id, username, classe, level, password };
+  return row as Alluser[];
+};
+
+export const verifyPassword = async (password: string):Promise<Alluser[]> => {
+  const [row] = await connection.execute(
+    'SELECT * FROM Trybesmith.Users WHERE password = ?',
+    [password],
+  );
+  return row as Alluser[];
 };

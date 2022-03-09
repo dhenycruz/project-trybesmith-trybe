@@ -1,5 +1,6 @@
 import express from 'express';
 import * as userController from './controllers/user';
+import logining from './controllers/login';
 
 const app = express();
 
@@ -12,6 +13,13 @@ app.post(
   userController.authLevel,
   userController.authPassword,
   userController.createUser,
+);
+
+app.post(
+  '/login',
+  userController.authName,
+  userController.authPassword,
+  logining,
 );
 
 export default app;
