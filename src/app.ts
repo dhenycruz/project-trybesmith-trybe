@@ -11,6 +11,7 @@ app.post(
   userController.authClass,
   userController.authLevel,
   userController.authPassword,
+  userController.createUser,
 );
 
 export default app;

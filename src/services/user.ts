@@ -1,4 +1,6 @@
 import { Iuser } from '../interfaces/user';
+import * as modelUser from '../models/user';
+import * as auth from '../token/authToken';
 
 interface Error {
   status: number,
@@ -54,4 +56,11 @@ export const authPassword = (body: Iuser): Error | true => {
     return { status: 422, message: 'Password must be longer than 7 characters' };
   }
   return true;
+};
+
+export const createUser = async (body: Iuser) => {
+  const result = await modelUser.createUser(body);
+  if (!result) return { status: 500 };
+  const token = auth.createToken(result);
+  return { status: 201, token };
 };

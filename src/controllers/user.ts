@@ -29,4 +29,9 @@ export const authPassword = (req: Request, res: Response, next: NextFunction) =>
   next();
 };
 
-export const getAll = () => {};
+export const createUser = async (req: Request, res: Response) => {
+  const { body } = req;
+  const result = await modelUser.createUser(body);
+  if (result.status === 500) res.status(500);
+  res.status(result.status).json({ token: result.token });
+};
