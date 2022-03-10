@@ -1,6 +1,8 @@
 import express from 'express';
 import * as userController from './controllers/user';
 import logining from './controllers/login';
+import authToken from './token/authToken';
+import * as productController from './controllers/product';
 
 const app = express();
 
@@ -20,6 +22,15 @@ app.post(
   userController.authName,
   userController.authPassword,
   logining,
+);
+
+app.post(
+  '/products',
+  authToken,
+  productController.authName,
+  productController.authAmount,
+  productController.createProduct,
+  productController.createProduct,
 );
 
 export default app;

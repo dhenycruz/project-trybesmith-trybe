@@ -1,6 +1,6 @@
 import { Iuser } from '../interfaces/user';
 import * as modelUser from '../models/user';
-import * as auth from '../token/authToken';
+import createToken from '../token/createToken';
 
 interface Error {
   status: number,
@@ -61,6 +61,6 @@ export const authPassword = (body: Iuser): Error | true => {
 export const createUser = async (body: Iuser) => {
   const result = await modelUser.createUser(body);
   if (!result) return { status: 500 };
-  const token = auth.createToken(result);
+  const token = createToken(result);
   return { status: 201, token };
 };

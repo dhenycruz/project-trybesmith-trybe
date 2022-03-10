@@ -32,6 +32,6 @@ export const authPassword = (req: Request, res: Response, next: NextFunction) =>
 export const createUser = async (req: Request, res: Response) => {
   const { body } = req;
   const result = await serviceUser.createUser(body);
-  if (result.status === 500) res.status(500);
+  if (result.status === 500) return res.status(500);
   res.status(result.status).json({ token: result.token });
 };

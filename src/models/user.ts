@@ -7,6 +7,14 @@ export const getAllUser = async () => {
   return row as Alluser[];
 };
 
+export const getUserForUsename = async (username: string) => {
+  const [row] = await connection.execute(
+    'SELECT * FROM Trybesmith.Users WHERE username = ?',
+    [username],
+  );
+  return row as Alluser[];
+};
+
 export const createUser = async (body: Iuser): Promise<Alluser | false> => {
   const { username, classe, level, password } = body;
   try {
