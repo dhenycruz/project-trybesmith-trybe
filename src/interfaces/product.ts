@@ -13,4 +13,5 @@ export interface Iproduct {
 
 export interface IAllproduct extends Iproduct {
   id: number,
+  orderId?: number | null,
 }

@@ -32,4 +32,10 @@ app.post(
   productController.createProduct,
 );
 
+app.get(
+  '/products',
+  authToken,
+  productController.getAll,
+);
+
 export default app;

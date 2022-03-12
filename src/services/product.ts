@@ -7,6 +7,12 @@ interface Error {
   message?: string
 }
 
+export const getAll = async () => {
+  const result = await modelProduct.getAll();
+  if (!result) return false;
+  return result;
+};
+
 export const authName = (name: string): Error | true => {
   if (!name) return { status: 400, message: 'Name is required' };
   if (typeof name !== 'string') return { status: 422, message: 'Name must be a string' };
