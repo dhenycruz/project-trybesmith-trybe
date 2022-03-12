@@ -30,7 +30,6 @@ app.post(
   productController.authName,
   productController.authAmount,
   productController.createProduct,
-  productController.createProduct,
 );
 
 export default app;

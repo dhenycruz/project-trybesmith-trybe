@@ -20,8 +20,8 @@ export const authAmount = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const createProduct = async (req: Request, res: Response) => {
-  const { body } = req;
-  const result = await serviceProduct.createProduct(body);
-  if (!result) return res.status(500);
+  const result = await serviceProduct.createProduct(req.body);
+  if (!result) res.status(500);
+
   res.status(201).json(result);
 };

@@ -22,6 +22,4 @@ export default async function authToken(req: Request, res: Response, next: NextF
   } catch (e) {
     return res.status(401).json({ error: 'Invalid token' });
   }
-
-  next();
 }

@@ -25,10 +25,9 @@ export const authAmount = (amount: string): Error | true => {
   return true;
 };
 
-export const createProduct = async (productBody: Iproduct) => {
-  const { name, amount } = productBody;
-  const result = await modelProduct.createProduct(name, amount);
-  if (!result) return { status: 500 };
-  
+export const createProduct = async (bodyProduct: Iproduct) => {
+  const result = await modelProduct.createProduct(bodyProduct);
+  if (!result) return false;
+
   return result;
 };
