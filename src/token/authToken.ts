@@ -15,7 +15,7 @@ export default async function authToken(req: Request, res: Response, next: NextF
   if (!token) return res.status(401).json({ error: 'Token not found' });
   try {
     const decodec = jwt.verify(token, secret) as ReturnVerify;
-    const user = modelUser.getUserForUsename(decodec.data.username);
+    const user = modelUser.verifyUserName(decodec.data.username);
     if (!user) return res.status(401).json({ error: 'User not found' });
 
     next();
