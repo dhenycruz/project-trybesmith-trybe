@@ -3,6 +3,7 @@ import * as userController from './controllers/user';
 import logining from './controllers/login';
 import authToken from './token/authToken';
 import * as productController from './controllers/product';
+import * as orderController from './controllers/order';
 
 const app = express();
 
@@ -36,6 +37,13 @@ app.get(
   '/products',
   authToken,
   productController.getAll,
+);
+
+app.post(
+  '/orders',
+  authToken,
+  orderController.verifyBodyOrder,
+  orderController.saveOrder,
 );
 
 export default app;
