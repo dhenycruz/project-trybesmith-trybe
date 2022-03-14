@@ -46,4 +46,10 @@ app.post(
   orderController.saveOrder,
 );
 
+app.get(
+  '/orders/:id',
+  authToken,
+  orderController.getOrder,
+);
+
 export default app;

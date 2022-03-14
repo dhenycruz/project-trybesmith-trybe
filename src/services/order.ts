@@ -12,6 +12,12 @@ interface OrderReturn {
   }
 }
 
+interface GetOrderReturn {
+  id: number,
+  userId: number,
+  products: number[],
+}
+
 export const verifyBodyOrder = (products: number[]): Error | true => {
   if (!products) return { status: 400, message: 'Products is required' };
   if (typeof products !== 'object') {
@@ -27,4 +33,10 @@ export const saveOrder = async (products: number[], userId: number)
   const result = await modelOrder.saveOrder(products, userId);
   if (!result) return false;
   return result;
+};
+
+export const getOrder = async (id: string): Promise<GetOrderReturn | false> => {
+  const result = await modelOrder.getOrder(id);
+  if (result.length < 1) return false;
+  return result[0] as GetOrderReturn;
 };
