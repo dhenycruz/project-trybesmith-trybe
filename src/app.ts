@@ -52,4 +52,10 @@ app.get(
   orderController.getOrder,
 );
 
+app.get(
+  '/orders',
+  authToken,
+  orderController.getAll,
+);
+
 export default app;

@@ -43,4 +43,12 @@ export const getOrder = async (id: string): Promise<GetOrderReturn[]> => {
   return row as GetOrderReturn[];
 };
 
-export const getAll = async () => {};
+export const getAll = async (): Promise<GetOrderReturn[]> => {
+  const [row] = await connection.execute(
+    `select od.id, od.userId, json_arrayagg(pd.id) as products
+    FROM Trybesmith.Orders od INNER JOIN Trybesmith.Products pd 
+    ON od.id = pd.orderId
+    group by od.id`,
+  );
+  return row as GetOrderReturn[];
+};

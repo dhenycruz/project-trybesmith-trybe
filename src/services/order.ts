@@ -40,3 +40,8 @@ export const getOrder = async (id: string): Promise<GetOrderReturn | false> => {
   if (result.length < 1) return false;
   return result[0] as GetOrderReturn;
 };
+
+export const getAll = async (): Promise<GetOrderReturn[]> => {
+  const result = await modelOrder.getAll();
+  return result as GetOrderReturn[];
+};

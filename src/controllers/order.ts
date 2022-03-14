@@ -20,9 +20,14 @@ export const saveOrder = async (req: IReqUser, res: Response) => {
   res.status(201).json(result);
 };
 
-export const getOrder = async (req: IReqUser, res: Response) => {
+export const getOrder = async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await serviceOrder.getOrder(id);
   if (!result) return res.status(404).json({ error: 'Order not found' });
+  res.status(200).json(result);
+};
+
+export const getAll = async (req: Request, res: Response) => {
+  const result = await serviceOrder.getAll();
   res.status(200).json(result);
 };
